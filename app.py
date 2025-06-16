@@ -2,6 +2,11 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
 import requests
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = FastAPI()
 
@@ -17,8 +22,9 @@ app.add_middleware(
 # Simulated in-memory database
 registered_emails = {"test@example.com", "user@site.com"}
 
-# Shared secret (must match frontend)
-APP_SECRET = "KeyOfSecure448877!!!"  # ⚠️ In production, store in env variable
+# Retrieve APP_SECRET from environment variables
+# You can also provide a fallback value
+APP_SECRET = os.getenv("APP_SECRET", "default_value")
 
 
 class EmailRequest(BaseModel):
