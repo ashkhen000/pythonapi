@@ -37,6 +37,9 @@ def verify_recaptcha(token: str) -> bool:
     result = r.json()
     return result.get("success", False)
 
+@app.get("/ping")
+def ping():
+    return {"status": "ok"}
 
 @app.post("/register")
 def register_email(req: EmailRequest, request: Request):
