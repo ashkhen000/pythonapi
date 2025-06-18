@@ -13,7 +13,7 @@ app = FastAPI()
 # CORS: allow only React app at localhost:3000
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["https://regemaill.netlify.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -35,7 +35,7 @@ class EmailRequest(BaseModel):
 def register_email(req: EmailRequest, request: Request):
     # 1. Check Origin header
     origin = request.headers.get("origin")
-    if origin != "http://localhost:3000":
+    if origin != "https://regemaill.netlify.app":
         raise HTTPException(
             status_code=403, detail="Forbidden: Invalid origin")
 
